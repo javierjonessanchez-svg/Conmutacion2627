@@ -1,0 +1,16 @@
+/* ===== modo repaso y adaptación a pantallas pequeñas ===== */
+/* ===== Repaso: una tarjeta por pregunta, con el color del tema del que sale (--pair lo pone arranque.js) ===== */
+#p-repaso .ctrl{gap:10px 14px}
+#p-repaso .ctrl select{font:inherit;font-size:15px;min-height:40px;padding:6px 10px;border:1px solid var(--rule);border-radius:var(--r-btn);background:var(--panel);color:var(--ink)}
+.fc{background:var(--panel);border:1px solid var(--rule);border-top:4px solid var(--pair);border-radius:0 0 var(--r-panel) var(--r-panel);padding:20px 26px 24px;margin:18px 0 14px;min-height:220px;max-width:720px}
+.fc .from{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--muted);margin-bottom:12px;font-variant-numeric:tabular-nums}
+.fc .from::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--pair)}
+.fc .qq{font:600 26px/1.2 var(--f-disp);letter-spacing:-.005em;text-wrap:balance}
+.fc .aa{margin-top:18px;padding-top:14px;border-top:1px dashed var(--rule);font-size:17px;max-width:62ch}
+.fc .aa>:first-child{margin-top:0}
+#fcbtn{gap:10px}
+#fcbtn .b{min-height:44px;padding:8px 18px;font-weight:700}
+.stats{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+#sres[hidden]{display:none}
+.aviso{max-width:1000px;margin:48px auto 0;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}

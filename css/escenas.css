@@ -1,0 +1,67 @@
+/* ===== Escenas animadas: traspaso (svg.ho) y autenticación (svg.au) ===== */
+/* Papeles de color: origen (BTS 1, BSC 1) azul, destino (BTS 2, BSC 2) naranja, MSC/VLR pizarra, HLR/AuC violeta, Ki rojo, Kc verde */
+.extra-i{display:block;margin-top:4px;font-size:13px;color:var(--muted)}
+
+/* ---------- Traspaso ---------- */
+svg.ho .c1{--c:var(--blue)}svg.ho .c2{--c:var(--orange)}svg.ho .s{--c:var(--slate)}
+svg.ho .ho-cel{fill:color-mix(in srgb,var(--c) 7%,transparent);stroke:color-mix(in srgb,var(--c) 35%,transparent);stroke-dasharray:6 6}
+svg.ho .ho-road{fill:var(--soft);stroke:var(--line)}
+svg.ho .ho-lk{stroke:var(--line);stroke-width:2;fill:none}
+svg.ho .ho-path{fill:none;stroke:var(--c);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;opacity:.45}
+svg.ho .ho-nd rect{fill:color-mix(in srgb,var(--c) 14%,var(--panel));stroke:var(--c);stroke-width:1.6}
+svg.ho .ho-nd text{font-size:14px;font-weight:700}
+svg.ho .ho-torre path{fill:none;stroke:var(--c);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+svg.ho .ho-torre text{font-size:13px}
+svg.ho .ho-rl{stroke:var(--c);stroke-width:1.8;stroke-dasharray:3 5}
+svg.ho .ho-ms rect{fill:var(--ink)}svg.ho .ho-ms .ho-pant{fill:var(--panel)}svg.ho .ho-ms text{font-size:12px;font-weight:700}
+svg.ho .ho-pista{fill:var(--soft)}
+svg.ho .ho-bar{fill:var(--c)}
+svg.ho .ho-fase rect{fill:var(--panel);stroke:var(--ink);stroke-width:1.2}svg.ho .ho-fase text{font-size:12px;font-weight:700}
+/* El elemento que actúa en el paso (hl) se marca con un borde grueso */
+svg.ho .hl rect,svg.ho .hl.ho-torre path{stroke-width:3.4}
+/* Tipos de traspaso (solo en el resumen): qué cambia en cada uno */
+svg.ho .ho-ti,svg.ho .ho-tb{opacity:0}
+svg.ho .ho-mapt{font-size:12px;fill:var(--map)}svg.ho .ho-map{stroke:var(--map);stroke-dasharray:6 4}
+svg.ho.t-bsc .ho-tb,svg.ho.t-inter .ho-ti{opacity:1}
+svg.ho.t-bsc #ho-bsc2,svg.ho.t-bsc #ho-l-m2,svg.ho.t-bsc #ho-l-b2,svg.ho.t-inter #ho-l-m2{opacity:.2}
+svg.ho.t-inter #ho-path2{stroke-opacity:.15}   /* en Inter-MSC el BSC 2 cuelga del MSC 2: no del MSC 1 */
+svg.ho.t-bsc #ho-bts1 path,svg.ho.t-bsc #ho-bts2 path,
+svg.ho.t-msc #ho-bts1 path,svg.ho.t-msc #ho-bts2 path,svg.ho.t-msc #ho-bsc1 rect,svg.ho.t-msc #ho-bsc2 rect,
+svg.ho.t-inter #ho-bts1 path,svg.ho.t-inter #ho-bts2 path,svg.ho.t-inter #ho-bsc1 rect,svg.ho.t-inter #ho-bsc2 rect,svg.ho.t-inter #ho-msc rect,svg.ho.t-inter #ho-msc2b rect{stroke-width:3.6;stroke-dasharray:5 3}
+/* Fila de tipos de traspaso, bajo los controles del reproductor */
+.ho-tipos{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+.ho-tipos[hidden]{display:none}
+.ho-tl{font-weight:700;margin-right:4px}
+.ho-tipos .b[aria-pressed="true"]{background:var(--pair);border-color:var(--pair);color:var(--on-pair)}
+.ho-tip{flex-basis:100%;margin:2px 0 0;min-height:1.5em}
+@media (max-width:700px){.ho-tipos .b{min-height:44px}}
+
+/* ---------- Autenticación ---------- */
+svg.au .au-col{--c:var(--ink)}svg.au .s{--c:var(--slate)}svg.au .v{--c:var(--violet)}
+svg.au .au-col>rect{fill:color-mix(in srgb,var(--c) 6%,var(--panel));stroke:color-mix(in srgb,var(--c) 45%,var(--line));stroke-width:1.5}
+svg.au .au-ct{font-size:15px;font-weight:700}
+svg.au .au-radio{stroke:var(--muted);stroke-width:1.4;stroke-dasharray:5 6}
+svg.au .au-simr{fill:color-mix(in srgb,var(--yellow) 14%,var(--panel));stroke:var(--yellow);stroke-width:1.5}
+svg.au .au-aucr{fill:color-mix(in srgb,var(--violet) 12%,var(--panel));stroke:var(--violet);stroke-width:1.5}
+svg.au .ki circle{fill:var(--panel);stroke:var(--red);stroke-width:3}svg.au .ki text{font-weight:700;fill:var(--red)}
+svg.au .au-chip rect{fill:var(--panel);stroke:var(--ink);stroke-width:1.4}svg.au .au-chip text{font-size:18px;font-weight:700}
+svg.au .au-fl{stroke:var(--muted);stroke-width:1.4}
+svg.au .au-tk rect{fill:var(--panel);stroke-width:2}svg.au .au-tk text{font-size:13px;font-weight:700}
+svg.au .tk-rand rect{stroke:var(--red)}svg.au .tk-sres rect{stroke:var(--blue)}svg.au .tk-kc rect{stroke:var(--green)}svg.au .tk-kc text{fill:var(--green)}
+svg.au .au-trip rect{stroke:var(--slate)}
+svg.au .au-sub{font-size:10px}
+svg.au .au-cmp{font-size:34px;font-weight:700;fill:var(--green)}svg.au .au-cmp.mal{fill:var(--red)}
+svg.au .au-kcl{stroke:var(--green);stroke-width:2;stroke-dasharray:5 4}svg.au .au-ptm{fill:var(--green)}
+svg.au .au-air{stroke:var(--muted);stroke-width:3;stroke-dasharray:3 5}
+svg.au .au-air.cifrado{stroke:var(--green);stroke-width:7;stroke-dasharray:none}
+svg.au .au-airt{font-size:14px;font-weight:700;fill:var(--green);paint-order:stroke;stroke:var(--panel);stroke-width:5px;stroke-linejoin:round}
+svg.au .au-res rect{fill:var(--panel);stroke:var(--ink);stroke-width:1.4}svg.au .au-res text{font-size:14px}
+svg.au .au-kit{fill:var(--red)}svg.au .au-kct{fill:var(--green)}
+svg.au .hl>rect,svg.au .hl .au-simr,svg.au .hl .au-aucr{stroke-width:3.4}
+/* Rama de la SIM clonada (clase alt en el svg): la llave de la SIM es otra */
+svg.au .clon-only,svg.au.alt .ok-only{display:none}svg.au.alt .clon-only{display:inline}
+.au-fila{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+.au-fila:has(.au-clon[hidden]){display:none}
+@media (max-width:700px){.au-fila .b{min-height:44px}}
+/* al imprimir, los botones de las escenas no sirven */
+@media print{.ho-tipos,.au-fila{display:none!important}}

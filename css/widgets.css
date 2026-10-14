@@ -1,0 +1,130 @@
+/* ===== widgets, secuencias y cuestionarios ===== */
+/* ===== Widgets ===== */
+.w{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r-panel);padding:14px 18px 18px;margin:20px 0}
+/* título del widget: rótulo condensado, como las etiquetas del repartidor */
+.w>.wt{font:600 21px/1.15 var(--f-disp);letter-spacing:-.003em;margin:0 0 10px;display:flex;gap:4px 10px;align-items:baseline;flex-wrap:wrap;text-wrap:balance}
+.w>.wt span{font:400 14px/1.4 var(--f-body);color:var(--muted);letter-spacing:0}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:8px 0}
+.ctrl label{font-size:14.5px;color:var(--muted)}
+.ctrl input[type=range]{accent-color:var(--pair);width:200px;max-width:100%}
+.ctrl input[type=text],.ctrl input[type=number],.ctrl select{font:inherit;font-size:15px;min-height:36px;padding:5px 9px;border:1px solid var(--rule);border-radius:var(--r-btn);background:var(--ground);color:var(--ink);font-variant-numeric:tabular-nums}
+.ctrl input:hover,.ctrl select:hover{border-color:var(--muted)}
+.ctrl input[type=text]{min-width:min(260px,100%);font-family:var(--f-mono)}
+.seg{display:inline-flex;gap:0;flex-wrap:wrap}
+.seg .b{border-radius:0;margin-left:-1px}
+.seg .b:first-child{border-radius:var(--r-btn) 0 0 var(--r-btn);margin-left:0}
+.seg .b:last-child{border-radius:0 var(--r-btn) var(--r-btn) 0}
+.seg .b[aria-pressed="true"],.seg .b.on{position:relative;z-index:1}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+/* resultados: lecturas de un instrumento; la cifra en condensada con números tabulares */
+.out div{background:var(--ground);border:1px solid var(--rule);border-radius:var(--r-fig);padding:7px 12px 8px}
+.out small{display:block;color:var(--muted);font-size:13px;line-height:1.3}
+.out b{font:600 28px/1.15 var(--f-disp);font-variant-numeric:tabular-nums}
+/* explicación de lo pulsado: canto del color del par, como la ficha */
+.info{margin-top:12px;padding:10px 14px;border-radius:0 var(--r-fig) var(--r-fig) 0;background:color-mix(in srgb,var(--pair) 7%,var(--panel));border-left:3px solid var(--pair);min-height:3.2em;font-size:15.5px;text-wrap:pretty}
+.info b.n{font:600 21px/1.2 var(--f-disp)}
+svg{max-width:100%}
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .sm{font-size:12px}svg .md{font-size:14px}svg .b{font-weight:700}svg .mu{fill:var(--muted)}
+svg .ln{stroke:var(--ink);stroke-width:1.6;fill:none}
+.diagram{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r-fig);padding:12px;margin:16px 0;overflow-x:auto}
+.diagram>svg{display:block;width:100%;height:auto;min-width:620px}
+.cap{font-size:14px;line-height:1.45;color:var(--muted);margin:8px 2px 0;max-width:none}
+.leg{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13.5px;color:var(--muted);margin:2px 0 10px}
+.leg i{display:inline-block;width:22px;height:0;border-top:3px solid;vertical-align:middle;margin-right:6px}
+/* secuencias */
+svg .life{stroke:var(--line);stroke-width:1.4;stroke-dasharray:4 4}
+svg .ahead{fill:color-mix(in srgb,var(--pair) 14%,var(--panel));stroke:var(--pair);stroke-width:1.5}
+svg .aht{font-family:var(--f-disp);font-size:17px;font-weight:600}
+svg .ar{stroke-width:1.9}
+svg .ar.rad{stroke:var(--rad)}svg .ar.map{stroke:var(--map)}svg .ar.ntr{stroke:var(--ink)}
+svg .ar.dash{stroke-dasharray:6 4}
+svg .mk.rad{fill:var(--rad)}svg .mk.map{fill:var(--map)}svg .mk.ntr{fill:var(--ink)}
+svg .lb{font-family:var(--f-mono);font-size:12px;paint-order:stroke;stroke:var(--panel);stroke-width:5px;stroke-linejoin:round}
+svg .band{fill:var(--soft);stroke:var(--line)}
+svg .bandt{font-size:12px;font-weight:700;fill:var(--muted)}
+svg .note{fill:var(--amber-bg);stroke:var(--amber)}
+svg .notet{font-size:12px;fill:var(--amber)}
+
+svg .bx{fill:var(--panel);stroke:var(--line);stroke-width:1.5}
+svg .bxa{fill:color-mix(in srgb,var(--blue) 16%,var(--panel));stroke:var(--blue);stroke-width:1.5}
+svg .bxg{fill:color-mix(in srgb,var(--green) 18%,var(--panel));stroke:var(--green);stroke-width:1.5}
+svg .bxw{fill:var(--amber-bg);stroke:var(--amber);stroke-width:1.5}
+svg .dashed{stroke-dasharray:6 4}
+.fx{background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--pair);border-radius:0 var(--r-fig) var(--r-fig) 0;padding:8px 14px;margin:8px 0;font-family:"Cambria Math",Cambria,Georgia,serif;font-size:18px;line-height:1.8;overflow-x:auto;max-width:78ch}
+.fx small{font-family:var(--f-body);font-size:13.5px;color:var(--muted)}
+/* arquitectura clicable */
+.nd{cursor:pointer}
+.nd rect{fill:var(--panel);stroke:var(--c);stroke-width:2.5}
+.nd text{font-family:var(--f-disp);font-size:17px;font-weight:600;pointer-events:none}
+.nd:hover rect{fill:color-mix(in srgb,var(--c) 14%,var(--panel))}
+.nd.sel rect{fill:var(--c)}
+.nd.sel text{fill:var(--on-pair)}
+.nd.nb rect{stroke-width:4}
+.lk line{stroke:var(--muted);stroke-width:2.2;opacity:.55}
+.lk.hi line{stroke:var(--ink);stroke-width:3.6;opacity:1}
+.lk text{font-family:var(--f-mono);font-size:12px;font-weight:700;fill:var(--muted);paint-order:stroke;stroke:var(--panel);stroke-width:4px}
+.lk.hi text{fill:var(--ink)}
+/* escalera de tiempos */
+.lad{display:grid;grid-template-columns:minmax(150px,230px) 1fr 120px;gap:6px 12px;align-items:center}
+.lad button{all:unset;cursor:pointer;display:contents}
+.lad .nm{font-size:14.5px}
+.lad .bar2{height:20px;background:var(--soft);border-radius:var(--r-fig);position:relative}
+.lad .bar2 i{position:absolute;left:0;top:0;bottom:0;border-radius:var(--r-fig);background:var(--pair)}
+.lad button:hover .nm{color:var(--pair-ink)}
+.lad .tt{font-family:var(--f-mono);font-size:13px;text-align:right}
+.lad .sel .nm{font-weight:700}
+/* ráfagas */
+.burst{display:flex;margin:10px 0 4px;min-height:64px}
+.burst button{all:unset;box-sizing:border-box;cursor:pointer;text-align:center;border:1px solid var(--line);margin-left:-1px;padding:8px 2px;min-width:0;display:flex;flex-direction:column;justify-content:center;font-size:13px}
+.burst button b{font-family:var(--f-mono);font-size:14px}
+.burst button small{color:var(--muted);font-size:11px}
+.burst button.sel{outline:3px solid var(--ink);outline-offset:-3px;z-index:1;position:relative}
+.burst button:focus-visible{outline:3px solid var(--pair-ink);z-index:2;position:relative}
+/* multitramas */
+.mf{display:grid;grid-template-columns:repeat(auto-fill,minmax(31px,1fr));gap:2px;margin:10px 0}
+/* :where() deja la especificidad en una clase, para que los colores .ch-* (más abajo) ganen al all:unset */
+.mf :where(button){all:unset;box-sizing:border-box;cursor:pointer;text-align:center;font-size:12px;font-weight:700;padding:5px 0 3px;border-radius:var(--r-fig);border:2px solid transparent;line-height:1.1}
+.mf button small{display:block;font-weight:400;font-size:9.5px;opacity:.65}
+.mf button.dim{opacity:.28}
+.mf button.sel{border-color:var(--ink)}
+.mf button:focus-visible{outline:3px solid var(--pair-ink)}
+.ch-F,.ch-S{background:color-mix(in srgb,var(--slate) 35%,var(--panel))}
+.ch-B{background:color-mix(in srgb,var(--yellow) 35%,var(--panel))}
+.ch-C{background:color-mix(in srgb,var(--orange) 32%,var(--panel))}
+.ch-R{background:color-mix(in srgb,var(--red) 28%,var(--panel))}
+.ch-T{background:color-mix(in srgb,var(--blue) 30%,var(--panel))}
+.ch-t{background:color-mix(in srgb,var(--blue) 14%,var(--panel))}
+.ch-D{background:color-mix(in srgb,var(--violet) 30%,var(--panel))}
+.ch-A{background:color-mix(in srgb,var(--green) 32%,var(--panel))}
+.ch-i{background:var(--soft);color:var(--muted)}
+.ch-G{background:color-mix(in srgb,var(--brown) 32%,var(--panel))}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}
+.chips .b{min-height:30px;padding:2px 11px;font-size:13.5px;border-radius:99px}
+/* canales lógicos */
+.cgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.cgrid h5{margin:0 0 6px;font:600 17px/1.2 var(--f-disp)}
+.cgrid .b{margin:0 5px 5px 0;font-family:var(--f-mono);font-size:13px}
+/* ranuras */
+.slots{display:grid;grid-template-columns:auto repeat(8,1fr);gap:3px;font-size:12px;max-width:560px}
+.slots div{border-radius:var(--r-fig);padding:4px 2px;text-align:center;font-variant-numeric:tabular-nums}
+.slots .h{color:var(--muted)}
+/* tablas de simulación */
+.sim{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:4px;margin:10px 0}
+.sim button{all:unset;cursor:pointer;text-align:center;border:1px solid var(--rule);border-radius:var(--r-fig);padding:8px 0;font-size:12px;background:var(--ground);line-height:1.2}
+.sim button:focus-visible{outline:3px solid var(--pair-ink);outline-offset:1px}
+.sim button.ms{outline:3px solid var(--ink);background:var(--soft);font-weight:700}
+.sim button.la0{background:color-mix(in srgb,var(--blue) 18%,var(--panel))}
+.sim button.la1{background:color-mix(in srgb,var(--green) 22%,var(--panel))}
+.sim button.la2{background:color-mix(in srgb,var(--orange) 22%,var(--panel))}
+.sim button.la3{background:color-mix(in srgb,var(--violet) 22%,var(--panel))}
+.sim button.pg{animation:pg .9s ease-out 1}
+@keyframes pg{0%{box-shadow:0 0 0 0 var(--red)}100%{box-shadow:0 0 0 10px transparent}}
+.frm{display:flex;margin:6px 0;border-radius:var(--r-fig);overflow:hidden;border:1px solid var(--rule);font-family:var(--f-mono);font-size:14px}
+.frm span{padding:8px 4px;text-align:center;border-right:1px solid var(--line);min-width:0;overflow-wrap:anywhere}
+.frm span:last-child{border-right:0}
+.stuf i{font-style:normal;background:var(--red);color:var(--on-pair);border-radius:3px;padding:0 2px}
+.stuf u{text-decoration:none;background:color-mix(in srgb,var(--orange) 30%,var(--panel));border-radius:3px}
+
+/* el widget del TRAU pinta su rótulo en blanco con estilo en línea; sobre el naranja claro del tema oscuro no se lee */
+.w svg text[style*="fill:#fff"]{fill:var(--on-pair)!important}

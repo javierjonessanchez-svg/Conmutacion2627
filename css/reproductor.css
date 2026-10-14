@@ -1,0 +1,40 @@
+/* ===== Reproductor de escenas: contenedor, transiciones de los pasos y pie de paso ===== */
+/* El contorno de foco rodea al .diagram (radio 10px) a 2px: radio 12px para que sea concéntrico */
+.pl:focus-visible{border-radius:12px}
+/* Cada paso solo cambia transform/opacity en línea: la transición hace el movimiento (y se puede interrumpir) */
+.pl svg *{transition-property:transform,opacity;transition-duration:.45s;transition-timing-function:cubic-bezier(.2,0,0,1)}
+/* Paquete en vuelo: la duración la pone el JS en línea (600/velocidad ms); el movimiento es una transición de transform */
+.pl svg .fly{transition-timing-function:cubic-bezier(.4,0,.2,1);pointer-events:none}
+.fly rect{fill:var(--ink)}.fly.rad rect{fill:var(--rad)}.fly.map rect{fill:var(--map)}
+.fly text{fill:var(--bg);font:700 11px Bahnschrift,system-ui,sans-serif}
+.pl-cap{margin:8px 4px 2px;min-height:2.6em;font-size:15px;text-wrap:pretty}
+.pl-cap b{font-family:Bahnschrift,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+/* Pastillas de pasos: una por paso, saltan a ese paso. La actual va rellena con el color del par */
+.pl-pills{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.pl-pill{font:inherit;font-size:13px;font-variant-numeric:tabular-nums;min-height:32px;padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink);cursor:pointer;transition-property:background-color,border-color,color,transform;transition-duration:.15s;transition-timing-function:cubic-bezier(.2,0,0,1)}
+.pl-pill:hover{border-color:var(--pair)}
+.pl-pill[aria-current="step"]{background:var(--pair);border-color:var(--pair);color:var(--on-pair)}
+.pl-pill:active,.pl-ctl .b:active{transform:scale(.96)}
+/* Botones de control: reutilizan .b; Reproducir/Pausa tiene ancho fijo para que no baile al cambiar la etiqueta */
+.pl-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 0}
+.pl-ctl .b{min-height:36px;font-variant-numeric:tabular-nums;transition-property:background-color,border-color,color,transform;transition-duration:.15s;transition-timing-function:cubic-bezier(.2,0,0,1)}
+.pl-ctl .pl-play{min-width:9.5em}
+.pl-spd{display:flex;gap:6px;margin-left:auto}
+.pl-ctl .b:focus-visible,.pl-pill:focus-visible{outline:3px solid var(--pair-ink);outline-offset:2px}
+/* Secuencias: el mensaje del paso actual (clase hl) va más grueso */
+svg g.hl .ar{stroke-width:3.2}
+svg g.hl .lb{font-weight:700}
+/* Modo reto: interruptor al final de los controles y tarjeta-pregunta entre el dibujo y el pie */
+.pl-retol{display:inline-flex;align-items:center;gap:6px;min-height:36px;font-size:14px;cursor:pointer;user-select:none}
+.pl-reto{width:18px;height:18px;margin:0;accent-color:var(--pair)}
+.pl-card{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:8px 0 0;padding:10px 14px;border:1px dashed var(--pair);border-radius:10px;background:var(--soft);font-size:15px}
+.pl-card .b{margin-left:auto}
+/* Móvil: pastillas y botones de al menos 44 px de alto (zona táctil) */
+@media (max-width:700px){
+  .pl-pill{min-height:44px;padding:4px 14px}
+  .pl-ctl .b,.pl-card .b{min-height:44px}
+  .pl-retol{min-height:44px}
+  .pl-spd{margin-left:0}
+}
+/* Impresión: el dibujo en su último paso (lo pone el JS en beforeprint), sin botones ni pastillas */
+@media print{.pl-ctl,.pl-pills,.pl-card{display:none!important}}

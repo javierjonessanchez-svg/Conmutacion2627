@@ -1,0 +1,80 @@
+/* ===== bloques de contenido: avisos, tablas, columnas, cuestionarios y problemas ===== */
+
+/* ----- Avisos. "Ojo": nota ámbar con canto izquierdo. "Extra": a trazos, como los temas sin pinchar
+   (lo discontinuo es lo que no viene en las diapositivas) ----- */
+.ojo,.extra{padding:11px 16px 12px;margin:18px 0;max-width:72ch;text-wrap:pretty}
+.ojo{background:var(--amber-bg);border-left:4px solid var(--amber);border-radius:0 var(--r-panel) var(--r-panel) 0}
+.extra{border:1px dashed color-mix(in srgb,var(--muted) 70%,var(--panel));border-radius:var(--r-panel)}
+.ojo>b:first-child{color:var(--amber)}
+.extra>b:first-child{color:var(--muted)}
+.ojo p,.extra p{margin:6px 0 0}
+
+/* ----- Tablas: sin relleno gris en la cabecera; la cabecera se separa con el color del par ----- */
+table{border-collapse:collapse;width:100%;background:var(--panel);font-size:15.5px;line-height:1.45;margin:16px 0}
+th,td{padding:8px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+th{font-weight:700;font-size:14.5px;border-bottom:2px solid var(--pair);white-space:nowrap}
+tr:last-child>td{border-bottom:0}
+td b{font-weight:700}
+/* el envoltorio .tw lleva el borde y el radio (una tabla con border-collapse no se redondea) */
+.tw{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r-panel);background:var(--panel)}
+.page .tw{margin:16px 0}
+.page .tw>table{margin:0;background:none}
+@media (max-width:900px){th{white-space:normal}}
+
+/* ----- Columnas y paneles ----- */
+.cols{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:16px 0}
+.pn{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r-panel);padding:12px 16px 14px}
+.pn h4{margin:2px 0 6px;font:600 21px/1.15 var(--f-disp)}
+.pn ul{padding-left:18px}
+.pn li::marker{color:var(--pair)}
+.pn.t{border-top:3px solid var(--pair)}
+.tag{display:inline-block;font-size:13px;font-weight:700;line-height:1.5;padding:1px 10px;border-radius:99px;background:color-mix(in srgb,var(--pair) 18%,var(--panel));color:var(--ink)}
+
+/* ----- Campos de bits ----- */
+.bits{display:flex;margin:8px 0 2px;border-radius:var(--r-fig);overflow:hidden;border:1px solid var(--rule);font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.bits span{padding:9px 4px;text-align:center;font-weight:700;border-right:1px solid var(--rule);min-width:0}
+.bits span:last-child{border-right:0}
+.bl{display:flex;font-size:12px;color:var(--muted);text-align:center;margin-bottom:8px}
+.bl span{padding:0 2px;min-width:0}
+.k1{background:color-mix(in srgb,var(--blue) 24%,var(--panel))}
+.k2{background:color-mix(in srgb,var(--green) 24%,var(--panel))}
+.k3{background:color-mix(in srgb,var(--orange) 26%,var(--panel))}
+.k4{background:color-mix(in srgb,var(--violet) 24%,var(--panel))}
+.k5{background:color-mix(in srgb,var(--red) 22%,var(--panel))}
+.k6{background:color-mix(in srgb,var(--yellow) 28%,var(--panel))}
+.k7{background:color-mix(in srgb,var(--slate) 28%,var(--panel))}
+
+/* ----- Contenedores de widgets y figuras: todo el ancho; radio por jerarquía (widget 6 px, figura 4 px) ----- */
+.page .w{border-color:var(--rule);border-radius:var(--r-panel);margin:22px 0}
+.page .diagram{border-color:var(--rule);border-radius:var(--r-fig)}
+
+/* ----- Autoevaluación: cada pregunta es un borne que se rellena al abrirla ----- */
+details.q,details.h{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r-panel);margin:8px 0;max-width:78ch;
+  transition-property:border-color;transition-duration:.15s;transition-timing-function:ease-out}
+details.q>summary,details.h>summary{list-style:none;cursor:pointer;display:flex;gap:12px;align-items:baseline;padding:10px 16px;border-radius:var(--r-panel)}
+details.q>summary::-webkit-details-marker,details.h>summary::-webkit-details-marker{display:none}
+details.q>summary{font-weight:700}
+details.q>summary::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;border:2px solid var(--pair);transform:translateY(1px);
+  transition-property:background-color;transition-duration:.15s;transition-timing-function:ease-out}
+details.q:hover,details.h:hover{border-color:color-mix(in srgb,var(--pair) 55%,var(--rule))}
+details.q[open]{border-color:var(--pair)}
+details.q[open]>summary::before{background:var(--pair)}
+details.q[open]>summary{padding-bottom:4px}
+/* la respuesta: todo lo que no es el summary, separado por una regla a trazos */
+details.q>:not(summary),details.h>:not(summary){margin-left:16px;margin-right:16px}
+details.q>:not(summary):last-child,details.h>:not(summary):last-child{margin-bottom:12px}
+details.q[open]>summary+*{border-top:1px dashed var(--rule);padding-top:8px;margin-top:6px}
+/* pistas: más discretas; borde continuo (lo discontinuo queda solo para lo que no está en las diapositivas o aún no ha llegado) */
+details.h{background:var(--soft)}
+details.h>summary{color:var(--muted);font-weight:700;font-size:15px}
+details.h>summary::before{content:"+";flex:none;width:12px;font:700 17px/1 var(--f-mono);color:var(--pair-ink)}
+details.h[open]>summary::before{content:"−"}
+details.h[open]{background:var(--panel);border-color:var(--pair)}
+
+/* ----- Problemas guiados ----- */
+.prob{border-left:4px solid var(--pair);padding:2px 0 2px 18px;margin:34px 0 10px}
+.prob h4{margin:0 0 4px;font:600 25px/1.15 var(--f-disp)}
+.prob .tools2{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.prob .tools2 a{font-size:14px;line-height:1.4;border:1px solid var(--rule);border-radius:99px;padding:4px 13px;text-decoration:none;color:var(--ink);background:var(--panel);
+  transition-property:border-color;transition-duration:.15s;transition-timing-function:ease-out}
+.prob .tools2 a:hover{border-color:var(--pair)}

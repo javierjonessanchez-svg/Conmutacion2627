@@ -1,0 +1,65 @@
+/* ===== mapa de la página de inicio: el repartidor ===== */
+/* Cada fila es una regleta (bloque de inserción) y cada tema, un par trenzado pinchado en ella que acaba en
+   un borne. Los temas pendientes cuelgan a trazos y sin pinchar. */
+#p-home h2{margin-bottom:8px}
+.maplead{font-size:18px;margin:0 0 6px;max-width:60ch}
+.mapw{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r-panel);padding:8px 10px 0;margin:18px 0 28px;overflow-x:auto}
+.mapw svg{display:block;width:100%;min-width:720px;height:auto}
+.mapw .map-v{display:none}
+/* regletas y sus rótulos */
+.mapw .rg{fill:var(--soft);stroke:var(--rule)}
+.mapw .rl{font:600 17px var(--f-disp);fill:var(--muted)}
+/* el tema: zona clicable, clip de inserción, par y borne */
+.node .hit{fill:transparent;transition-property:fill;transition-duration:.15s;transition-timing-function:ease-out}
+.node:hover .hit,.node a:focus-visible .hit{fill:color-mix(in srgb,var(--c) 10%,var(--panel))}
+.node a{cursor:pointer;outline:none}
+.node a:focus-visible .hit{stroke:color-mix(in srgb,var(--c) 72%,var(--ink));stroke-width:3}
+.node .clip{fill:var(--c)}
+.node .pr path{fill:none}
+.node .pr .wc,.node .pr .wo{stroke:var(--c);stroke-width:3.5}
+.node .pr .we{stroke:color-mix(in srgb,var(--c) 50%,var(--panel));stroke-width:5}
+.node .pr .ww{stroke:var(--white-wire);stroke-width:2.5}
+.node text{fill:var(--ink)}
+.node .t1{font:600 23px var(--f-disp);letter-spacing:-.005em}
+.node .t2{font-size:12.5px;fill:var(--muted)}
+/* borne: vacío, visto (medio lleno) o dominado (lleno) */
+.node .jk{fill:var(--panel);stroke:var(--c);stroke-width:3}
+.node.seen .jk{fill:color-mix(in srgb,var(--c) 40%,var(--panel))}
+.node.done .jk{fill:var(--c)}
+/* pendiente: clip sin pinchar, par a trazos y sin color */
+.node.pend a{cursor:default}
+.node.pend:hover .hit{fill:transparent}
+.node.pend .clip{fill:none;stroke:var(--c);stroke-width:1.5;stroke-dasharray:3 2.5;opacity:.7}
+.node.pend .pr path{stroke:var(--c);stroke-width:2;stroke-dasharray:4 4;opacity:.55}
+.node.pend .pr .we,.node.pend .pr .ww{display:none}
+.node.pend .jk{stroke-dasharray:3 3;stroke-width:2}
+.node.pend text{fill:var(--muted)}
+
+/* ===== debajo del mapa: pruebas a la izquierda, herramientas a la derecha ===== */
+.homegrid{display:grid;gap:20px 40px;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start}
+.homegrid>.pn{background:none;border:0;border-top:1px solid var(--rule);border-radius:0;padding:14px 0 0}
+.homegrid>.pn.t{border-top:1px solid var(--rule)}
+.homegrid h4{font:600 26px/1.1 var(--f-disp);margin:0 0 6px}
+/* próximas pruebas: cuenta atrás grande con cifras tabulares */
+.next{display:grid;grid-template-columns:76px minmax(0,1fr);gap:16px;align-items:start;padding:12px 0;border-bottom:1px solid var(--rule)}
+.next:last-child{border-bottom:0}
+.next .dd{font:700 48px/.9 var(--f-disp);font-variant-numeric:tabular-nums;letter-spacing:-.01em;text-align:right;color:var(--ink)}
+.next.hoy .dd{color:var(--red);font-size:40px}
+.next .dd small{display:block;font:400 13px/1.4 var(--f-body);color:var(--muted);margin-top:4px;letter-spacing:0}
+.next p{margin:0}
+.next .links{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:4px}
+.next .links a{font-size:14.5px}
+/* herramientas: una lista con reglas, no tarjetas */
+.tools a{display:block;padding:10px 0 11px;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink);font-weight:700;transition-property:color;transition-duration:.15s;transition-timing-function:ease-out}
+.tools a:last-child{border-bottom:0}
+.tools a:hover{color:var(--pair-ink)}
+.tools small{display:block;color:var(--muted);font-weight:400;font-size:14.5px;margin-top:1px}
+@media (max-width:900px){
+  .homegrid{grid-template-columns:minmax(0,1fr)}
+  .next{grid-template-columns:60px minmax(0,1fr);gap:12px}
+  .next .dd{font-size:40px}
+  /* en el móvil, el repartidor en vertical: una regleta por bloque y los pares saliendo hacia la derecha */
+  .mapw{padding:6px 4px 0}
+  .mapw .map-h{display:none}
+  .mapw .map-v{display:block;min-width:0;max-width:440px}
+}

@@ -1,0 +1,149 @@
+/* ===== rejilla de la app, barra lateral, navegación y cabecera de tema ===== */
+/* ===== Estructura ===== */
+.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+
+/* ----- Barra lateral: el "repartidor" (una regleta vertical con un latiguillo por tema) ----- */
+.rail{position:sticky;top:0;height:100vh;overflow:auto;padding:22px 14px 16px 16px;background:var(--panel);border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:16px}
+.brand{font:700 34px/1 var(--f-disp);letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.brand small{display:block;font:400 13px/1.35 var(--f-body);color:var(--muted);margin-top:6px;letter-spacing:0}
+.search input{width:100%;min-height:40px;padding:8px 11px;border:1px solid var(--rule);border-radius:var(--r-btn);background:var(--ground);color:var(--ink);font:inherit;font-size:15px}
+.search input::placeholder{color:var(--muted);opacity:1}
+#sres{margin-top:6px;border:1px solid var(--rule);border-radius:var(--r-panel);background:var(--panel);max-height:50vh;overflow:auto;font-size:14px}
+#sres a{display:block;padding:8px 11px;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--soft)}
+#sres a:hover,#sres a:focus-visible{background:var(--soft)}
+#sres b{display:block}
+#sres span{color:var(--muted)}
+
+nav#nav{position:relative;display:flex;flex-direction:column;gap:2px}
+/* la regleta: barra vertical de la que salen los latiguillos */
+nav#nav::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:4px;border-radius:2px;background:var(--rule);z-index:1}
+.ni{position:relative;display:flex;align-items:center;gap:10px;min-height:40px;padding:6px 8px 6px 0;border-radius:0 var(--r-btn) var(--r-btn) 0;text-decoration:none;color:var(--ink);font-size:15px;line-height:1.25;transition-property:background-color;transition-duration:.15s;transition-timing-function:ease-out}
+.ni:hover{background:var(--soft)}
+.ni small{display:block;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:1px}
+/* el conector: un trozo del mismo par trenzado (CX.stub) y su borne */
+.ni .jk{flex:none;position:relative;display:flex;align-items:center;width:38px;height:14px}
+.jk .stub{display:block;width:24px;height:14px;opacity:.5;transition-property:opacity;transition-duration:.15s;transition-timing-function:ease-out}
+.jk .stub path{fill:none}
+.jk .wc,.jk .wo{stroke:var(--c);stroke-width:2.5}
+.jk .we{stroke:color-mix(in srgb,var(--c) 50%,var(--panel));stroke-width:3.5}
+.jk .ww{stroke:var(--white-wire);stroke-width:2}
+.ni .jk::after{content:"";position:absolute;right:0;top:0;width:14px;height:14px;border-radius:50%;border:2px solid color-mix(in srgb,var(--c) 50%,var(--panel));background:var(--panel)}
+/* visto: el par con todo su color; dominado: borne soldado con marca */
+.ni.seen .stub,.ni.done .stub,.ni.on .stub{opacity:1}
+.ni.seen .jk::after,.ni.on .jk::after{border-color:var(--c)}
+.ni.done .jk::after{border-color:var(--c);background:var(--c);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3.5' d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/10px no-repeat,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3.5' d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/10px no-repeat,linear-gradient(#000 0 0);
+  mask-composite:exclude}
+.ni.on{background:color-mix(in srgb,var(--c) 13%,var(--panel));font-weight:700}
+.ni.on small{font-weight:400}
+.ni.pend{color:var(--muted);cursor:default}
+.ni.pend:hover{background:none}
+/* pendiente: par sin conectar, solo el contorno a trazos */
+.ni.pend .stub{opacity:.6}
+.ni.pend .stub path{stroke-dasharray:2 2.5}
+.ni.pend .stub .wo{display:none}
+.ni.pend .jk::after{border-style:dashed}
+
+.railfoot{margin-top:auto;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)}
+
+/* ----- Botones ----- */
+.b{font:inherit;font-size:15px;line-height:1.3;min-height:36px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);padding:6px 14px;border-radius:var(--r-btn);cursor:pointer;
+  transition-property:background-color,border-color,color,transform;transition-duration:.15s;transition-timing-function:ease-out}
+.b:hover{border-color:var(--pair-ink)}
+.b:active{transform:scale(.96)}
+.b[aria-pressed="true"],.b.on,.b.pri{background:var(--pair-ink);border-color:var(--pair-ink);color:var(--on-pair)}
+.b:disabled{opacity:.45;cursor:default}
+.b:disabled:active{transform:none}
+
+main{padding:32px clamp(16px,4vw,56px) 96px;min-width:0}
+.page{display:none;max-width:1000px;margin:0 auto}
+.page.show{display:block}
+
+/* ===== Cabecera de tema ===== */
+.page.tema{--pair:var(--blue)}
+.tema[data-color="orange"]{--pair:var(--orange)}
+.tema[data-color="green"]{--pair:var(--green)}
+.tema[data-color="brown"]{--pair:var(--brown)}
+.tema[data-color="slate"]{--pair:var(--slate)}
+.tema[data-color="red"]{--pair:var(--red)}
+.tema[data-color="yellow"]{--pair:var(--yellow)}
+.tema[data-color="violet"]{--pair:var(--violet)}
+.page h2{font:700 clamp(34px,5.2vw,56px)/1.02 var(--f-disp);letter-spacing:-.012em;margin:4px 0 14px;text-wrap:balance}
+.page.tema h2{font-size:clamp(40px,6.2vw,72px);line-height:1;margin:0}
+.src{font-size:13px;line-height:1.4;color:var(--muted);margin:0 0 6px}
+/* el par trenzado (lo dibuja arranque.js): dos hilos que se cruzan a paso fijo a lo ancho del contenido */
+.twist{display:block;width:100%;height:20px;margin:16px 0 22px;overflow:hidden}
+.twist path{fill:none;vector-effect:non-scaling-stroke}
+.twist .wc{stroke:var(--pair);stroke-width:4}
+.twist .we{stroke:color-mix(in srgb,var(--pair) 50%,var(--panel));stroke-width:5.5}
+.twist .ww{stroke:var(--white-wire);stroke-width:3}
+.twist .wo{stroke:var(--pair);stroke-width:4}
+.lead{font-size:20px;line-height:1.5;max-width:62ch;margin:0 0 6px;text-wrap:pretty}
+/* índice interno: discreto, una línea de enlaces con su punto de soldadura */
+.jump{display:flex;flex-wrap:wrap;column-gap:20px;margin:14px 0 4px;font-size:14.5px}
+.jump a{display:inline-flex;align-items:center;gap:7px;min-height:32px;color:var(--muted);text-decoration:none;transition-property:color;transition-duration:.15s;transition-timing-function:ease-out}
+.jump a::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--pair)}
+.jump a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--pair)}
+/* "En corto": la ficha técnica, con el par como canto izquierdo */
+.summary{background:var(--panel);border:1px solid var(--rule);border-left:4px solid var(--pair);border-radius:0 var(--r-panel) var(--r-panel) 0;padding:16px 22px 18px 20px;margin:22px 0 8px}
+.summary h3{margin:0 0 8px;font-size:22px}
+.summary h3::before{display:none}
+.summary ul{margin:0;padding-left:18px;max-width:none;font-size:16px;line-height:1.55;columns:2 300px;column-gap:40px}
+.summary li{margin:0 0 8px;break-inside:avoid}
+.summary li::marker{color:var(--pair)}
+h3{font:600 30px/1.1 var(--f-disp);letter-spacing:-.005em;margin:52px 0 12px;scroll-margin-top:16px;text-wrap:balance}
+/* punto de soldadura en el color del par, sin numerar */
+h3::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--pair);box-shadow:0 0 0 3px color-mix(in srgb,var(--pair) 22%,transparent);margin:0 12px 0 3px;vertical-align:.2em}
+h4{font:700 18px/1.3 var(--f-body);margin:22px 0 6px}
+p{margin:10px 0;max-width:68ch;text-wrap:pretty}
+ul,ol{max-width:68ch}
+li{margin:4px 0;text-wrap:pretty}
+.pgnav{display:flex;justify-content:space-between;gap:12px;margin-top:20px;flex-wrap:wrap}
+/* cada enlace lleva arriba el color del tema al que lleva (--c), como el canto de su par */
+.pgnav a{flex:1 1 220px;border:1px solid var(--rule);border-top:3px solid var(--c,var(--rule));border-radius:var(--r-panel);padding:10px 16px 12px;text-decoration:none;color:var(--ink);background:var(--panel);font:600 22px/1.2 var(--f-disp);
+  transition-property:border-color,background-color;transition-duration:.15s;transition-timing-function:ease-out}
+.pgnav a:hover{border-color:var(--c,var(--pair));background:color-mix(in srgb,var(--c,var(--pair)) 7%,var(--panel))}
+.pgnav small{display:block;font:400 13px/1.4 var(--f-body);color:var(--muted);margin-bottom:2px}
+.pgnav a.nx{text-align:right}
+/* "Lo domino": una franja propia al final del tema; el botón lleva un borne que se rellena al marcarlo */
+.domino{display:flex;align-items:center;gap:10px 16px;margin-top:56px;padding:14px 16px;border:1px solid var(--rule);border-radius:var(--r-panel);background:var(--panel);flex-wrap:wrap}
+.domino .b{display:inline-flex;align-items:center;gap:9px;font-weight:700;min-height:40px}
+.domino .b::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--pair-ink);background:transparent}
+.domino .b[aria-pressed="true"]::before{border-color:var(--on-pair);background:var(--on-pair)}
+.domino .stats{flex:1 1 280px}
+
+/* ===== Móvil: la barra lateral pasa a barra superior con los conectores en fila desplazable =====
+   */
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  /* barra superior en tres filas: marca y búsqueda, conectores, progreso y tema */
+  .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--rule);padding:12px 16px 10px;gap:10px;flex-direction:row;flex-wrap:wrap;align-items:center}
+  .brand{font-size:28px;flex:none}
+  .brand small{display:none}
+  .search{flex:1 1 150px;min-width:0;position:relative}
+  .search input{min-height:44px}
+  #sres{position:absolute;left:0;right:0;z-index:5}
+  .rail nav#nav{flex:1 1 100%;flex-direction:row}
+  nav#nav::before{display:none}
+  .ni small{display:none}
+  .rail .railfoot{flex:1 1 100%}
+  .rail nav#nav{flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:0 -16px;padding:2px 16px 6px;scroll-snap-type:x proximity;scroll-padding-inline:16px;scrollbar-width:thin;
+    -webkit-mask:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+  .rail .ni{flex:none;white-space:nowrap;min-height:44px;padding:6px 14px 6px 10px;border:1px solid var(--rule);border-radius:99px;scroll-snap-align:start}
+  .rail .ni.on{border-color:var(--c)}
+  .rail .railfoot{flex-direction:row;flex-wrap:wrap;align-items:center}
+  .railfoot #prog{flex:1 1 auto}
+  .railfoot .b{flex:none;min-height:44px;font-size:14px;padding:6px 12px}
+  /* imprimir desde el móvil da lo mismo con el menú del navegador (print.css saca todos los temas) */
+  .railfoot #print{display:none}
+  .page.tema h2{font-size:clamp(38px,11vw,56px)}
+  .lead{font-size:18.5px}
+  h3{font-size:27px;margin-top:44px}
+  /* el índice interno, en una sola fila desplazable para no empujar el contenido hacia abajo */
+  .jump{flex-wrap:nowrap;overflow-x:auto;margin:12px -16px 0;padding:0 16px;scrollbar-width:none;
+    -webkit-mask:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+  .jump::-webkit-scrollbar{display:none}
+  .jump a{flex:none;white-space:nowrap;min-height:44px}
+}

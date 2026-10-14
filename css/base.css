@@ -1,0 +1,61 @@
+/* ===== paleta, modo claro/oscuro y tipografía base ===== */
+/* ===== Paleta "La central": código de colores de pares telefónicos (TIA/EIA) =====
+   Nombres nuevos del diseño (--ground, --rule, --white-wire) y nombres antiguos que usan los widgets
+   (--bg, --line, --soft...) apuntan a los mismos valores. */
+:root{
+  /* claro, "sala de repartidores": pared gris fría y panel esmaltado */
+  --ground:#E8ECEF; --panel:#FAFBFC; --ink:#16212B; --muted:#5B6874; --rule:#C7D0D8; --soft:#EDF0F3;
+  --bg:var(--ground); --line:var(--rule);
+  --blue:#2160B5; --orange:#D9721C; --green:#2C8650; --brown:#7A4B2A; --slate:#687A8C;
+  --red:#C2382F; --yellow:#B08700; --violet:#6E4BB8;
+  --white-wire:#FFFFFF;
+  --on-pair:#FFFFFF;     /* texto sobre un relleno del color del par */
+  --pair:var(--blue);
+  --amber:#A84D0A; --amber-bg:#F8EEDC;
+  --rad:var(--blue); --map:var(--green);
+  /* tipografía */
+  --f-disp:"Barlow Condensed",Bahnschrift,"DIN Alternate","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible","Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;
+  --f-mono:"Cascadia Mono",Consolas,ui-monospace,monospace;
+  /* radios por jerarquía: paneles y botones 6, figuras 4, pastillas redondas */
+  --r-panel:6px; --r-fig:4px; --r-btn:6px;
+  color-scheme:light;
+}
+/* oscuro, "el bastidor de noche": los colores del par suben de luz para mantener el contraste */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#141B22; --panel:#1B242E; --ink:#E4EAF0; --muted:#93A1AF; --rule:#2C3A48; --soft:#222D38;
+    --blue:#6E9CF0; --orange:#F09A4D; --green:#55C28A; --brown:#C89670; --slate:#9DB0C2;
+    --red:#F07A70; --yellow:#E2BE45; --violet:#A98CF0;
+    --white-wire:#C9D3DC; --on-pair:#141B22;
+    --amber:#F0B35A; --amber-bg:#2E2717;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141B22; --panel:#1B242E; --ink:#E4EAF0; --muted:#93A1AF; --rule:#2C3A48; --soft:#222D38;
+  --blue:#6E9CF0; --orange:#F09A4D; --green:#55C28A; --brown:#C89670; --slate:#9DB0C2;
+  --red:#F07A70; --yellow:#E2BE45; --violet:#A98CF0;
+  --white-wire:#C9D3DC; --on-pair:#141B22;
+  --amber:#F0B35A; --amber-bg:#2E2717;
+  color-scheme:dark;
+}
+/* --pair-ink: el color del par mezclado con la tinta, para texto, enlaces y anillos de foco.
+   En claro oscurece el naranja y el amarillo (de 3:1 a 5:1 sobre el panel); en oscuro aclara.
+   Se declara donde cambia --pair para que tome el color del tema y no el de :root. */
+:root,.page,.pn,[style*="--pair"]{--pair-ink:color-mix(in srgb,var(--pair) 72%,var(--ink))}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--f-body)}
+.disp{font-family:var(--f-disp)}
+code,.mono,kbd{font-family:var(--f-mono);font-size:.88em}
+a{color:var(--pair-ink);text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{text-decoration-thickness:2px}
+/* foco visible en el color del par; el contorno sigue el radio de cada elemento */
+:focus-visible{outline:3px solid var(--pair-ink);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--panel);padding:8px 12px;z-index:99}
+.skip:focus{left:8px;top:8px}
+/* números que se alinean o cambian: cifras de ancho fijo */
+table,.out,#prog,.stats,.lad .tt,.dd{font-variant-numeric:tabular-nums}

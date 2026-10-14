@@ -1,0 +1,26 @@
+/* ===== impresión: limpia, tinta negra sobre blanco ===== */
+@media print{
+  /* paleta clara siempre, aunque la pantalla esté en oscuro (el :is() iguala o supera la especificidad de los bloques oscuros) */
+  :root:is([data-theme],:not([data-theme])){
+    --ground:#fff;--panel:#fff;--ink:#000;--muted:#444;--rule:#bbb;--soft:#f3f3f3;
+    --blue:#2160B5;--orange:#D9721C;--green:#2C8650;--brown:#7A4B2A;--slate:#687A8C;--red:#C2382F;--yellow:#B08700;--violet:#6E4BB8;
+    --white-wire:#fff;--on-pair:#fff;--amber:#7a3a05;--amber-bg:#fff;color-scheme:light}
+  .rail,.pgnav,.domino,.jump,.twist,.skip,#p-home,#p-repaso,.aviso{display:none!important}
+  .app{display:block}
+  main{padding:0}
+  .page{max-width:none}
+  .page.tema{display:block!important;break-before:page}
+  .page.tema:first-of-type{break-before:auto}
+  body{background:#fff;color:#000;font-size:10.5pt;line-height:1.45}
+  .page.tema h2{font-size:28pt;margin-bottom:8pt}
+  h3{font-size:17pt;margin-top:18pt;break-after:avoid}
+  h3::before{box-shadow:none}
+  .lead{font-size:12pt}
+  a{color:inherit;text-decoration:none}
+  /* sin rellenos de pantalla: solo reglas finas */
+  .summary,.w,.diagram,.pn,.fx,.tw,details.q,details.h,.ojo,.extra,.info{background:#fff!important;box-shadow:none}
+  .ojo{border-left-color:#000}
+  details.q:not([open]) > *:not(summary){display:block}
+  details.q>summary::before,details.h>summary::before{display:none}
+  .w,.diagram,table,.fx,details.q{break-inside:avoid}
+}
